@@ -5,6 +5,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Contact Manager is in development phase.</h1>
+        <h2>Hello from Server</h2>
       </header>
     </div>
   );
