@@ -60,18 +60,28 @@ const createContact = async (req, res) => {
 
 const updateContact = async (req, res) => {
   try {
-    const contact = await Contact.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const contact = await Contact.findById(req.params.id);
     if (!contact) {
       return res.status(404).json({
         success: false,
         message: "Contact not found.",
       });
     }
+    const isDuplicate = await Contact.findOne({ phone: req.body.phone });
+    if (isDuplicate) {
+      return res.status(400).json({
+        success: false,
+        message: "Phone number already exists.",
+      });
+    }
+    const updatedContact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     return res.status(200).json({
       success: true,
-      data: contact,
+      data: updatedContact,
     });
   } catch (err) {
     return res.status(500).json({

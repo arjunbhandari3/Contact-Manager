@@ -7,7 +7,7 @@ const email = check("email")
   .withMessage("Email is required.")
   .isEmail()
   .normalizeEmail()
-  .withMessage("Email format is not correct.");
+  .withMessage("Email is invalid.");
 const password = check("password")
   .trim()
   .notEmpty()
