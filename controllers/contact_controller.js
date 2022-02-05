@@ -2,7 +2,10 @@ const Contact = require("../models/contact");
 
 const getMyContacts = async (req, res) => {
   try {
-    const contacts = await Contact.find({ user: req.user.id });
+    const contacts = await Contact.find({ user: req.user.id }).sort({
+      createdAt: -1,
+    });
+
     return res.status(200).json({
       success: true,
       data: contacts,
@@ -22,6 +25,12 @@ const getContact = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "Contact not found.",
+      });
+    }
+    if (contact && contact.user.toString() !== req.user.id) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized.",
       });
     }
     return res.status(200).json({
@@ -45,7 +54,7 @@ const createContact = async (req, res) => {
         message: "Phone number already exists.",
       });
     }
-    const newContact = await Contact.create(req.body);
+    const newContact = await Contact.create({ ...req.body, user: req.user.id });
     return res.status(201).json({
       success: true,
       data: newContact,
@@ -65,6 +74,12 @@ const updateContact = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "Contact not found.",
+      });
+    }
+    if (contact && contact.user.toString() !== req.user.id) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized.",
       });
     }
     const isDuplicate = await Contact.findOne({ phone: req.body.phone });
@@ -98,6 +113,12 @@ const deleteContact = async (req, res) => {
       return res.status(404).json({
         success: false,
         message: "Contact not found.",
+      });
+    }
+    if (contact && contact.user.toString() !== req.user.id) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized.",
       });
     }
     return res.status(200).json({
