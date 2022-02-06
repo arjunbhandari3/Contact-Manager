@@ -1,0 +1,36 @@
+.input-wrapper {
+  position: relative;
+  margin-top: 2.5rem;
+}
+
+label {
+  position: absolute;
+  left: 1.3rem;
+  top: -0.9rem;
+  padding: 0 0.5rem;
+  background: #fff;
+  z-index: 3;
+}
+
+.input-wrapper span {
+  color: tomato;
+  font-size: 0.8rem;
+  position: absolute;
+}
+
+input {
+  border-radius: 5px;
+  width: 100%;
+  padding: 0.7rem 1.5rem;
+  margin: 1rem 0;
+  background-color: transparent;
+  position: relative;
+  display: block;
+  border: 1px solid #f7f7f7;
+  font: 1.2rem;
+}
+
+input[type="password"] {
+  letter-spacing: 0.2rem;
+  font: 1rem bold;
+}

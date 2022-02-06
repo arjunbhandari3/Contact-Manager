@@ -1,13 +1,21 @@
+import { Fragment } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import Header from "./components/header/Header";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Contact Manager is in development phase.</h1>
-        <h2>Hello from Server</h2>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Fragment>
+        <Header />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </Fragment>
+    </BrowserRouter>
   );
 }
 
