@@ -14,11 +14,13 @@ label {
 
 .input-wrapper span {
   color: tomato;
+  margin: -0.8rem 0;
   font-size: 0.8rem;
   position: absolute;
 }
 
 input {
+  border: 1px solid grey;
   border-radius: 5px;
   width: 100%;
   padding: 0.7rem 1.5rem;
@@ -26,7 +28,6 @@ input {
   background-color: transparent;
   position: relative;
   display: block;
-  border: 1px solid #f7f7f7;
   font: 1.2rem;
 }
 

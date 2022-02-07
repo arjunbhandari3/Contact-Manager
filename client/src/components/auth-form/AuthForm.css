@@ -5,6 +5,10 @@
   padding: 0 2rem;
 }
 
+.form-wrapper h2 {
+  margin-bottom: 1rem;
+}
+
 .button-wrapper {
   display: "inline-block";
   margin: 2rem 0;

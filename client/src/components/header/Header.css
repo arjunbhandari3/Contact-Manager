@@ -22,6 +22,10 @@
   margin: 0;
 }
 
+.navbar h1 a:hover {
+  color: #fff;
+}
+
 .navbar a {
   color: #fff;
   padding: 0.45rem;
@@ -31,7 +35,7 @@
 }
 
 .navbar a.active {
-  color: #d3cfcf;
+  border-bottom: 1px solid #fff;
 }
 
 .navbar a:hover {

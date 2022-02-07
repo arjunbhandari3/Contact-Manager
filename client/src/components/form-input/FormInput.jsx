@@ -2,26 +2,27 @@ import React from "react";
 import "./FormInput.css";
 
 const FormInput = (props) => {
-  const { label, name, type, error, placeholder, disabled } = props;
+  const { label, input, type, meta, placeholder, disabled } = props;
+  const errorInput = meta.error && meta.touched ? "error" : "";
 
   const inputStyle = {
-    border: error ? "1px solid red" : "1px solid grey",
+    border: errorInput ? "1px solid red" : "1px solid grey",
   };
 
   return (
     <div className="input-wrapper">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={input.name}>{label}</label>
       <input
+        {...input}
         style={inputStyle}
-        error={error}
-        name={name}
+        error={errorInput}
         type={type}
         autoComplete="off"
         placeholder={placeholder}
         disabled={disabled}
         required
       />
-      {error ? <span>{error}</span> : null}
+      {errorInput && <span>{meta.error}</span>}
     </div>
   );
 };

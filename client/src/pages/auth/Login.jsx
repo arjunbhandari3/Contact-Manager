@@ -1,24 +1,36 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Field } from "redux-form";
 import AuthForm from "../../components/auth-form/AuthForm";
+import Alert from "../../components/common/Alert";
 import FormInput from "../../components/form-input/FormInput";
 import { loginForm } from "../../constants/FormFields";
+import { login } from "../../redux/actions/authActions";
 
 class LoginPage extends Component {
-  // FORM FIELDS
+  renderInput = (props) => <FormInput {...props} />;
+
+  onSubmit = (formValues) => {
+    this.props.login(formValues);
+  };
+
   renderInputFields = loginForm.map((login) => (
-    <FormInput
+    <Field
       key={login.name}
       name={login.name}
-      type={login.type}
       label={login.label}
+      type={login.type}
+      component={this.renderInput}
       placeholder={login.placeholder}
       disabled={login.disabled}
     />
   ));
 
-  onSubmit = () => {};
-
-  alertMessage = () => {};
+  alertMessage = () => {
+    if (this.props.alert) {
+      return <Alert message={this.props.alert.message} />;
+    }
+  };
 
   render() {
     return (
@@ -26,7 +38,7 @@ class LoginPage extends Component {
         title="Hello, Welcome Back!"
         fields={this.renderInputFields}
         alert={this.alertMessage()}
-        onSubmit={this.onSubmit()}
+        onSubmit={this.onSubmit}
         button1="Login"
         button2="Sign Up"
         linkto="/register"
@@ -35,4 +47,8 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+const mapStateToProps = (state) => {
+  return { alert: state.alert[0] };
+};
+
+export default connect(mapStateToProps, { login })(LoginPage);
