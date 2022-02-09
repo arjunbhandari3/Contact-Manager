@@ -6,6 +6,7 @@ const getMyContacts = async (req, res) => {
       createdAt: -1,
     });
 
+    console.log(contacts);
     return res.status(200).json({
       success: true,
       data: contacts,
@@ -68,6 +69,8 @@ const createContact = async (req, res) => {
 };
 
 const updateContact = async (req, res) => {
+  const { name, email, phone, type } = req.body;
+
   try {
     const contact = await Contact.findById(req.params.id);
     if (!contact) {
@@ -82,16 +85,26 @@ const updateContact = async (req, res) => {
         message: "Unauthorized.",
       });
     }
-    const isDuplicate = await Contact.findOne({ phone: req.body.phone });
+    const isDuplicate = await Contact.findOne({ phone: phone });
     if (isDuplicate) {
       return res.status(400).json({
         success: false,
         message: "Phone number already exists.",
       });
     }
+
+    const contactFields = {};
+    if (name) contactFields.name = name;
+    if (email) contactFields.email = email;
+    if (phone) contactFields.phone = phone;
+    if (image) contactFields.image = image;
+    if (address) contactFields.address = address;
+    if (faourite) contactFields.faourite = favourite;
+    if (type) contactFields.type = type;
+
     const updatedContact = await Contact.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { $set: contactFields },
       { new: true }
     );
     return res.status(200).json({

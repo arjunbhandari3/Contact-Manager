@@ -10,3 +10,11 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOG_OUT = "LOG_OUT";
 export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
+
+// CONTACT
+export const GET_CONTACTS = "GET_CONTACTS";
+export const GET_CONTACT = "GET_CONTACT";
+export const CREATE_CONTACT = "CREATE_CONTACT";
+export const UPDATE_CONTACT = "UPDATE_CONTACT";
+export const DELETE_CONTACT = "DELETE_CONTACT";
+export const CONTACT_ERROR = "CONTACT_ERROR";
